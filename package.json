@@ -5,6 +5,14 @@
   "repository": "https://github.com/LucasAraujoDeSa/job-APIv2",
   "author": "lucas_araujo <andrelucassaaraujo@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "yarn run lint -- --fix",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "yarn test -- --watch",
+    "test:staged": "yarn test -- --findRelatedTests",
+    "test:coverage": "yarn test -- --coverage"
+  },
   "dependencies": {
     "git-commit-msg-linter": "^3.2.6"
   },
