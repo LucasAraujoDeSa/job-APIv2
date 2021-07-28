@@ -1,5 +1,5 @@
 {
-  "name": "Job-APIv2",
+  "name": "job_api_v2",
   "version": "2.0.0",
   "main": ".",
   "repository": "https://github.com/LucasAraujoDeSa/job-APIv2",
@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "yarn run lint -- --fix",
-    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test": "yarn lint:fix && jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
     "test:coverage": "yarn test -- --coverage"
