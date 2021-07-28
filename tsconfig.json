@@ -9,6 +9,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
