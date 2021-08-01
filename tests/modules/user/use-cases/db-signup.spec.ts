@@ -90,4 +90,14 @@ describe("==> signup", () => {
 
     expect(hashAdapterFake.plaintext).toEqual(params.password);
   });
+
+  it("should return a hashedPassword if hashAdapter success", async () => {
+    const { sut, hashAdapterFake } = makeSut();
+
+    const user = await sut.add({
+      ...params,
+    });
+
+    expect(user.password).toEqual(hashAdapterFake.hashedplaintext);
+  });
 });
