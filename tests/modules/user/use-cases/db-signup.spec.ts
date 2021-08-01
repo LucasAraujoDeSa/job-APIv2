@@ -2,6 +2,7 @@ import { DbSignup } from "@/modules/user/use-cases/db-signup";
 import {
   EmailValidatorAdapterFake,
   HashAdapterFake,
+  SmtpAdapterFake,
 } from "@/tests/shared/adapters";
 import { UserMock } from "../mocks/user-mock";
 import { CheckByEmailRepositoryFake, AddAccountRepositoryFake } from "../fakes";
@@ -13,11 +14,13 @@ const makeSut = () => {
   const checkByEmailRepositoryFake = new CheckByEmailRepositoryFake();
   const hashAdapterFake = new HashAdapterFake();
   const addAccountRepositoryFake = new AddAccountRepositoryFake();
+  const smtpAdapterFake = new SmtpAdapterFake();
   const sut = new DbSignup(
     emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake,
-    addAccountRepositoryFake
+    addAccountRepositoryFake,
+    smtpAdapterFake
   );
   return {
     sut,
@@ -25,6 +28,7 @@ const makeSut = () => {
     checkByEmailRepositoryFake,
     hashAdapterFake,
     addAccountRepositoryFake,
+    smtpAdapterFake,
   };
 };
 
@@ -124,5 +128,16 @@ describe("==> signup", () => {
     const user = await sut.add(params);
 
     expect(addAccountRepositoryFake.result).toEqual(user);
+  });
+
+  it("should smtpAdapter with correct values", async () => {
+    const { sut, smtpAdapterFake } = makeSut();
+
+    const user = await sut.add(params);
+
+    expect(smtpAdapterFake.params).toEqual({
+      id: user.id,
+      email: user.email,
+    });
   });
 });
