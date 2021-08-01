@@ -41,6 +41,16 @@ describe("==> signup", () => {
     ).rejects.toEqual(new Error("invalid email format"));
   });
 
+  it("should call checkByEmail with correct values", async () => {
+    const { sut, checkByEmailFake } = makeSut();
+
+    await sut.add({
+      ...params,
+    });
+
+    expect(checkByEmailFake.email).toEqual(params.email);
+  });
+
   it("should throw a error if email already in use", async () => {
     const { sut, checkByEmailFake } = makeSut();
 
