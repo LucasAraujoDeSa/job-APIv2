@@ -1,4 +1,8 @@
-import { EmailValidatorAdapter, HashAdapter } from "@/shared/adapters";
+import {
+  EmailValidatorAdapter,
+  HashAdapter,
+  SmtpAdapter,
+} from "@/shared/adapters";
 import { Signup } from "../domain/use-cases/signup";
 import { CheckByEmailRepository, AddAccountRepository } from "../repositories";
 
@@ -7,7 +11,8 @@ export class DbSignup implements Signup {
     private readonly _emailValidatorAdapter: EmailValidatorAdapter,
     private readonly _checkByEmailRepository: CheckByEmailRepository,
     private readonly _hashAdapter: HashAdapter,
-    private readonly _addAccountRepository: AddAccountRepository
+    private readonly _addAccountRepository: AddAccountRepository,
+    private readonly _smtpAdapter: SmtpAdapter
   ) {}
 
   public async add(params: Signup.Params): Promise<Signup.Result> {
@@ -32,6 +37,11 @@ export class DbSignup implements Signup {
     const newAccount = await this._addAccountRepository.add({
       ...params,
       password: hashedPassword,
+    });
+
+    await this._smtpAdapter.send({
+      id: newAccount.id,
+      email: newAccount.email,
     });
 
     return newAccount;
