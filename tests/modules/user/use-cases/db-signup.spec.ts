@@ -1,5 +1,5 @@
 import { DbSignup } from "@/modules/user/use-cases/db-signup";
-import { EmailValidatorFake } from "@/tests/shared/adapters";
+import { EmailValidatorFake, HashAdapterFake } from "@/tests/shared/adapters";
 import { UserMock } from "../mocks/user-mock";
 import { CheckByEmailFake } from "../fakes";
 
@@ -8,11 +8,17 @@ const params = UserMock();
 const makeSut = () => {
   const emailValidatorFake = new EmailValidatorFake();
   const checkByEmailFake = new CheckByEmailFake();
-  const sut = new DbSignup(emailValidatorFake, checkByEmailFake);
+  const hashAdapterFake = new HashAdapterFake();
+  const sut = new DbSignup(
+    emailValidatorFake,
+    checkByEmailFake,
+    hashAdapterFake
+  );
   return {
     sut,
     emailValidatorFake,
     checkByEmailFake,
+    hashAdapterFake,
   };
 };
 
@@ -73,5 +79,15 @@ describe("==> signup", () => {
         ...params,
       })
     ).rejects.toEqual(new Error("email already in use"));
+  });
+
+  it("should call hashAdapter with correct values", async () => {
+    const { sut, hashAdapterFake } = makeSut();
+
+    await sut.add({
+      ...params,
+    });
+
+    expect(hashAdapterFake.plaintext).toEqual(params.password);
   });
 });
