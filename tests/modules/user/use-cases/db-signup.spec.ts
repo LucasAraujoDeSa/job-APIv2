@@ -1,15 +1,18 @@
 import { DbSignup } from "@/modules/user/use-cases/db-signup";
 import { EmailValidatorFake } from "@/shared/adapters/email-validator-adapter/fake/email-validator-fake";
 import { UserMock } from "../mocks/user-mock";
+import { CheckByEmailFake } from "../fakes";
 
 const params = UserMock();
 
 const makeSut = () => {
   const emailValidatorFake = new EmailValidatorFake();
-  const sut = new DbSignup(emailValidatorFake);
+  const checkByEmailFake = new CheckByEmailFake();
+  const sut = new DbSignup(emailValidatorFake, checkByEmailFake);
   return {
     sut,
     emailValidatorFake,
+    checkByEmailFake,
   };
 };
 
@@ -36,5 +39,19 @@ describe("==> signup", () => {
         email: "invalid_email",
       })
     ).rejects.toEqual(new Error("invalid email format"));
+  });
+
+  it("should throw a error if email already in use", async () => {
+    const { sut, checkByEmailFake } = makeSut();
+
+    jest
+      .spyOn(checkByEmailFake, "ifAlreadyInUse")
+      .mockImplementationOnce(() => new Promise((reject) => reject(true)));
+
+    expect(
+      sut.add({
+        ...params,
+      })
+    ).rejects.toEqual(new Error("email already in use"));
   });
 });
