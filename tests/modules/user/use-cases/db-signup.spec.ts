@@ -117,4 +117,12 @@ describe("==> signup", () => {
       password: hashAdapterFake.hashedplaintext,
     });
   });
+
+  it("should return a newAccount if addAccountRepository success", async () => {
+    const { sut, addAccountRepositoryFake } = makeSut();
+
+    const user = await sut.add(params);
+
+    expect(addAccountRepositoryFake.result).toEqual(user);
+  });
 });
