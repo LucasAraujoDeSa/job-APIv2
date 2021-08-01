@@ -1,4 +1,4 @@
-import { EmailValidatorAdapter } from "../email-validator-adapter";
+import { EmailValidatorAdapter } from "@/shared/adapters";
 
 export class EmailValidatorFake implements EmailValidatorAdapter {
   email: string;

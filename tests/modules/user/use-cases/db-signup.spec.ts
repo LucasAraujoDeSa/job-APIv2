@@ -1,5 +1,5 @@
 import { DbSignup } from "@/modules/user/use-cases/db-signup";
-import { EmailValidatorFake } from "@/shared/adapters/email-validator-adapter/fake/email-validator-fake";
+import { EmailValidatorFake } from "@/tests/shared/adapters";
 import { UserMock } from "../mocks/user-mock";
 import { CheckByEmailFake } from "../fakes";
 
