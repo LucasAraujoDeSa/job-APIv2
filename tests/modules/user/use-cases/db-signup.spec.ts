@@ -1,23 +1,23 @@
 import { DbSignup } from "@/modules/user/use-cases/db-signup";
 import { EmailValidatorFake, HashAdapterFake } from "@/tests/shared/adapters";
 import { UserMock } from "../mocks/user-mock";
-import { CheckByEmailFake } from "../fakes";
+import { CheckByEmailRepositoryFake } from "../fakes";
 
 const params = UserMock();
 
 const makeSut = () => {
   const emailValidatorFake = new EmailValidatorFake();
-  const checkByEmailFake = new CheckByEmailFake();
+  const checkByEmailRepositoryFake = new CheckByEmailRepositoryFake();
   const hashAdapterFake = new HashAdapterFake();
   const sut = new DbSignup(
     emailValidatorFake,
-    checkByEmailFake,
+    checkByEmailRepositoryFake,
     hashAdapterFake
   );
   return {
     sut,
     emailValidatorFake,
-    checkByEmailFake,
+    checkByEmailRepositoryFake,
     hashAdapterFake,
   };
 };
@@ -58,20 +58,20 @@ describe("==> signup", () => {
   });
 
   it("should call checkByEmail with correct values", async () => {
-    const { sut, checkByEmailFake } = makeSut();
+    const { sut, checkByEmailRepositoryFake } = makeSut();
 
     await sut.add({
       ...params,
     });
 
-    expect(checkByEmailFake.email).toEqual(params.email);
+    expect(checkByEmailRepositoryFake.email).toEqual(params.email);
   });
 
   it("should throw a error if email already in use", async () => {
-    const { sut, checkByEmailFake } = makeSut();
+    const { sut, checkByEmailRepositoryFake } = makeSut();
 
     jest
-      .spyOn(checkByEmailFake, "ifAlreadyInUse")
+      .spyOn(checkByEmailRepositoryFake, "ifAlreadyInUse")
       .mockImplementationOnce(() => new Promise((reject) => reject(true)));
 
     expect(

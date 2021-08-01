@@ -1,1 +1,1 @@
-export * from "./check-by-email";
+export * from "./check-by-email-repository";

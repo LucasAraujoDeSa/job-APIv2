@@ -1,11 +1,11 @@
 import { EmailValidatorAdapter, HashAdapter } from "@/shared/adapters";
 import { Signup } from "../domain/use-cases/signup";
-import { CheckByEmail } from "../repositories";
+import { CheckByEmailRepository } from "../repositories";
 
 export class DbSignup implements Signup {
   constructor(
     private readonly _emailValidator: EmailValidatorAdapter,
-    private readonly _checkByEmail: CheckByEmail,
+    private readonly _checkByEmailRepository: CheckByEmailRepository,
     private readonly _hashAdapter: HashAdapter
   ) {}
 
@@ -16,7 +16,7 @@ export class DbSignup implements Signup {
       throw new Error("invalid email format");
     }
 
-    const alreadyEmailInUse = await this._checkByEmail.ifAlreadyInUse(
+    const alreadyEmailInUse = await this._checkByEmailRepository.ifAlreadyInUse(
       params.email
     );
 
