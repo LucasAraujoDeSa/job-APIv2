@@ -140,4 +140,12 @@ describe("==> signup", () => {
       email: user.email,
     });
   });
+
+  it("should return a newAccount if success", async () => {
+    const { sut, addAccountRepositoryFake } = makeSut();
+
+    const user = await sut.add(params);
+
+    expect(user).toEqual(addAccountRepositoryFake.result);
+  });
 });
