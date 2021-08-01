@@ -1,22 +1,25 @@
 import { DbSignup } from "@/modules/user/use-cases/db-signup";
-import { EmailValidatorFake, HashAdapterFake } from "@/tests/shared/adapters";
+import {
+  EmailValidatorAdapterFake,
+  HashAdapterFake,
+} from "@/tests/shared/adapters";
 import { UserMock } from "../mocks/user-mock";
 import { CheckByEmailRepositoryFake } from "../fakes";
 
 const params = UserMock();
 
 const makeSut = () => {
-  const emailValidatorFake = new EmailValidatorFake();
+  const emailValidatorAdapterFake = new EmailValidatorAdapterFake();
   const checkByEmailRepositoryFake = new CheckByEmailRepositoryFake();
   const hashAdapterFake = new HashAdapterFake();
   const sut = new DbSignup(
-    emailValidatorFake,
+    emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake
   );
   return {
     sut,
-    emailValidatorFake,
+    emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake,
   };
@@ -33,20 +36,20 @@ describe("==> signup", () => {
   });
 
   it("should call emailValidator with correct values", async () => {
-    const { sut, emailValidatorFake } = makeSut();
+    const { sut, emailValidatorAdapterFake } = makeSut();
 
     await sut.add({
       ...params,
     });
 
-    expect(emailValidatorFake.email).toEqual(params.email);
+    expect(emailValidatorAdapterFake.email).toEqual(params.email);
   });
 
   it("should throw a error if email format is invalid", async () => {
-    const { sut, emailValidatorFake } = makeSut();
+    const { sut, emailValidatorAdapterFake } = makeSut();
 
     jest
-      .spyOn(emailValidatorFake, "isValid")
+      .spyOn(emailValidatorAdapterFake, "isValid")
       .mockImplementationOnce(() => new Promise((reject) => reject(false)));
 
     expect(

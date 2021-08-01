@@ -1,6 +1,6 @@
 import { EmailValidatorAdapter } from "@/shared/adapters";
 
-export class EmailValidatorFake implements EmailValidatorAdapter {
+export class EmailValidatorAdapterFake implements EmailValidatorAdapter {
   email: string;
 
   public async isValid(email: string): Promise<boolean> {

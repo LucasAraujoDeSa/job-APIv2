@@ -4,13 +4,15 @@ import { CheckByEmailRepository } from "../repositories";
 
 export class DbSignup implements Signup {
   constructor(
-    private readonly _emailValidator: EmailValidatorAdapter,
+    private readonly _emailValidatorAdapter: EmailValidatorAdapter,
     private readonly _checkByEmailRepository: CheckByEmailRepository,
     private readonly _hashAdapter: HashAdapter
   ) {}
 
   public async add(params: Signup.Params): Promise<Signup.Result> {
-    const isValidEmail = await this._emailValidator.isValid(params.email);
+    const isValidEmail = await this._emailValidatorAdapter.isValid(
+      params.email
+    );
 
     if (!isValidEmail) {
       throw new Error("invalid email format");
