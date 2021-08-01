@@ -80,7 +80,7 @@
 
 > ### Registro de Usuário
 
-    0. senha deve ser encriptada;
+    0. ✅ senha deve ser encriptada;
 
 > ### Login
 
