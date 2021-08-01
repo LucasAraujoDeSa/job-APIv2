@@ -4,7 +4,7 @@ import {
   HashAdapterFake,
 } from "@/tests/shared/adapters";
 import { UserMock } from "../mocks/user-mock";
-import { CheckByEmailRepositoryFake } from "../fakes";
+import { CheckByEmailRepositoryFake, AddAccountRepositoryFake } from "../fakes";
 
 const params = UserMock();
 
@@ -12,16 +12,19 @@ const makeSut = () => {
   const emailValidatorAdapterFake = new EmailValidatorAdapterFake();
   const checkByEmailRepositoryFake = new CheckByEmailRepositoryFake();
   const hashAdapterFake = new HashAdapterFake();
+  const addAccountRepositoryFake = new AddAccountRepositoryFake();
   const sut = new DbSignup(
     emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
-    hashAdapterFake
+    hashAdapterFake,
+    addAccountRepositoryFake
   );
   return {
     sut,
     emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake,
+    addAccountRepositoryFake,
   };
 };
 
@@ -102,5 +105,16 @@ describe("==> signup", () => {
     });
 
     expect(user.password).toEqual(hashAdapterFake.hashedplaintext);
+  });
+
+  it("should call addAccountRepository with correct values", async () => {
+    const { sut, hashAdapterFake, addAccountRepositoryFake } = makeSut();
+
+    await sut.add(params);
+
+    expect(addAccountRepositoryFake.params).toEqual({
+      ...params,
+      password: hashAdapterFake.hashedplaintext,
+    });
   });
 });
