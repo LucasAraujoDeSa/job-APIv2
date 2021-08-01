@@ -26,6 +26,16 @@ describe("==> signup", () => {
     expect(user.email).toEqual(params.email);
   });
 
+  it("should call emailValidator with correct values", async () => {
+    const { sut, emailValidatorFake } = makeSut();
+
+    await sut.add({
+      ...params,
+    });
+
+    expect(emailValidatorFake.email).toEqual(params.email);
+  });
+
   it("should throw a error if email format is invalid", async () => {
     const { sut, emailValidatorFake } = makeSut();
 
