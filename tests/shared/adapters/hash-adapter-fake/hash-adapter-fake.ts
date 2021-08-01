@@ -3,11 +3,11 @@ import { HashAdapter } from "@/shared/adapters";
 export class HashAdapterFake implements HashAdapter {
   plaintext: string;
 
-  hashedplaintext: string;
+  hashedplaintext = "hashed_password";
 
   public async hash(plaintext: string): Promise<string> {
     this.plaintext = plaintext;
-    return "hashed_password";
+    return this.hashedplaintext;
   }
 
   public async compare(plaintext: string, hash: string): Promise<boolean> {
