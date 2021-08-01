@@ -9,9 +9,9 @@
 > ### Registro de Usuário
 
     0. receber requisição do tipo **POST** na rota **/api/user/singup**
-    1. deve validar formato do email;
-    2. deve verificar se email já está em uso;
-    3. deve diferenciar se a conta e para um candidato ou empresa;
+    1. ✅ deve validar formato do email;
+    2. ✅ deve verificar se email já está em uso;
+    3. ✅ deve diferenciar se a conta e para um candidato ou empresa;
     4. deve enviar um email de confirmação;
     5. se email for confirmado, usuario recebe status de ativo;
 
