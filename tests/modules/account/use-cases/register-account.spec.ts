@@ -4,10 +4,10 @@ import {
   HashAdapterFake,
   SmtpAdapterFake,
 } from "@/tests/shared/adapters";
-import { UserMock } from "../mocks/user-mock";
+import { AccountMock } from "../mocks/account-mock";
 import { CheckByEmailRepositoryFake, AddAccountRepositoryFake } from "../fakes";
 
-const params = UserMock();
+const params = AccountMock();
 
 const makeSut = () => {
   const emailValidatorAdapterFake = new EmailValidatorAdapterFake();
