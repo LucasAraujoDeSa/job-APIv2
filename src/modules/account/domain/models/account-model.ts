@@ -1,4 +1,4 @@
-export interface UserModel {
+export interface AccountModel {
   id: string;
   name: string;
   email: string;
@@ -7,7 +7,7 @@ export interface UserModel {
   role: string;
 }
 
-export interface UpdateUserModel {
+export interface UpdateAccountModel {
   id: string;
   name?: string;
   email?: string;

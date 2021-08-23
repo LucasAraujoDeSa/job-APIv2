@@ -1,3 +1,3 @@
-export interface CheckByEmailRepository {
+export interface CheckByEmailRepositoryContract {
   ifAlreadyInUse(email: string): Promise<boolean>;
 }

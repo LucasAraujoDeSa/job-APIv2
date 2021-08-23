@@ -3,22 +3,24 @@ import {
   HashAdapter,
   SmtpAdapter,
 } from "@/shared/adapters";
-import { Signup } from "../../domain/contracts/use-cases/signup";
+import { RegisterAccountContract } from "../../domain/contracts/use-cases/register-account-contract";
 import {
-  CheckByEmailRepository,
-  AddAccountRepository,
+  CheckByEmailRepositoryContract,
+  AddAccountRepositoryContract,
 } from "../../domain/contracts/repositories";
 
-export class DbSignup implements Signup {
+export class RegisterAccount implements RegisterAccountContract {
   constructor(
     private readonly _emailValidatorAdapter: EmailValidatorAdapter,
-    private readonly _checkByEmailRepository: CheckByEmailRepository,
+    private readonly _checkByEmailRepository: CheckByEmailRepositoryContract,
     private readonly _hashAdapter: HashAdapter,
-    private readonly _addAccountRepository: AddAccountRepository,
+    private readonly _addAccountRepository: AddAccountRepositoryContract,
     private readonly _smtpAdapter: SmtpAdapter
   ) {}
 
-  public async add(params: Signup.Params): Promise<Signup.Result> {
+  public async add(
+    params: RegisterAccountContract.Params
+  ): Promise<RegisterAccountContract.Result> {
     const isValidEmail = await this._emailValidatorAdapter.isValid(
       params.email
     );

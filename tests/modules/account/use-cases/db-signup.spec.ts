@@ -1,4 +1,4 @@
-import { DbSignup } from "@/modules/user/application/use-cases/db-signup";
+import { RegisterAccount } from "@/modules/account/application/register-account/register-account";
 import {
   EmailValidatorAdapterFake,
   HashAdapterFake,
@@ -15,7 +15,7 @@ const makeSut = () => {
   const hashAdapterFake = new HashAdapterFake();
   const addAccountRepositoryFake = new AddAccountRepositoryFake();
   const smtpAdapterFake = new SmtpAdapterFake();
-  const sut = new DbSignup(
+  const sut = new RegisterAccount(
     emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake,
