@@ -1,7 +1,7 @@
 import faker from "faker";
 import { AccountModel } from "@/modules/account/domain/models";
 
-export const UserMock = (): Omit<AccountModel, "id"> => ({
+export const AccountMock = (): Omit<AccountModel, "id"> => ({
   name: faker.name.findName(),
   email: faker.internet.email(),
   password: faker.internet.password(),
