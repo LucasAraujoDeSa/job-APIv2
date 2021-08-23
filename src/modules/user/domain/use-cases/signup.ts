@@ -1,4 +1,4 @@
-import { UserModel } from "../../domain/models/user-model";
+import { UserModel } from "../models/user-model";
 
 export interface Signup {
   add(params: Signup.Params): Promise<Signup.Result>;

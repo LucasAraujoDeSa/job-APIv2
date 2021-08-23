@@ -1,4 +1,4 @@
-import { CheckByEmailRepository } from "@/modules/user/application/repositories";
+import { CheckByEmailRepository } from "@/modules/user/repositories";
 
 export class CheckByEmailRepositoryFake implements CheckByEmailRepository {
   email: string;

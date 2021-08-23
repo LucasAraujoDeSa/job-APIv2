@@ -3,11 +3,8 @@ import {
   HashAdapter,
   SmtpAdapter,
 } from "@/shared/adapters";
-import { Signup } from "../application/use-cases/signup";
-import {
-  CheckByEmailRepository,
-  AddAccountRepository,
-} from "../application/repositories";
+import { Signup } from "../domain/use-cases/signup";
+import { CheckByEmailRepository, AddAccountRepository } from "../repositories";
 
 export class DbSignup implements Signup {
   constructor(

@@ -1,4 +1,4 @@
-import { AddAccountRepository } from "@/modules/user/application/repositories";
+import { AddAccountRepository } from "@/modules/user/repositories";
 
 export class AddAccountRepositoryFake implements AddAccountRepository {
   params: AddAccountRepository.Params;
