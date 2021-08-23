@@ -1,4 +1,4 @@
-import { DbSignup } from "@/modules/user/use-cases/db-signup";
+import { DbSignup } from "@/modules/user/application/use-cases/db-signup";
 import {
   EmailValidatorAdapterFake,
   HashAdapterFake,
