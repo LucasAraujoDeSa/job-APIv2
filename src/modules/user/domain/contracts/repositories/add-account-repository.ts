@@ -1,4 +1,4 @@
-import { UserModel } from "../domain/models";
+import { UserModel } from "../../models";
 
 export interface AddAccountRepository {
   add(
