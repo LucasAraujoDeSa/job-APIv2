@@ -1,4 +1,4 @@
-import { RegisterAccount } from "@/modules/account/application/register-account/register-account";
+import { RegisterAccount } from "@/modules/account/domain/use-cases/register-account/register-account";
 import {
   EmailValidatorAdapterFake,
   HashAdapterFake,

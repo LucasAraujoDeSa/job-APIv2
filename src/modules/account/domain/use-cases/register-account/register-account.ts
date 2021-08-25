@@ -3,11 +3,11 @@ import {
   HashAdapter,
   SmtpAdapter,
 } from "@/shared/adapters";
-import { RegisterAccountContract } from "../../domain/contracts/use-cases/register-account-contract";
+import { RegisterAccountContract } from "../../contracts/use-cases/register-account-contract";
 import {
   CheckByEmailRepositoryContract,
   AddAccountRepositoryContract,
-} from "../../domain/contracts/repositories";
+} from "../../contracts/repositories";
 
 export class RegisterAccount implements RegisterAccountContract {
   constructor(
