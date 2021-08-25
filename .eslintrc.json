@@ -29,6 +29,7 @@
     "no-underscore-dangle": "off",
     "no-shadow": "off",
     "import/export": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
