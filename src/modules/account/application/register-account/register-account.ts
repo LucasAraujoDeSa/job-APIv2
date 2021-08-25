@@ -26,7 +26,7 @@ export class RegisterAccount implements RegisterAccountContract {
     );
 
     if (!isValidEmail) {
-      throw new Error("invalid email format");
+      throw new Error("Invalid email format");
     }
 
     const alreadyEmailInUse = await this._checkByEmailRepository.ifAlreadyInUse(
@@ -34,7 +34,7 @@ export class RegisterAccount implements RegisterAccountContract {
     );
 
     if (alreadyEmailInUse) {
-      throw new Error("email already in use");
+      throw new Error("Email already in use");
     }
 
     const hashedPassword = await this._hashAdapter.hash(params.password);

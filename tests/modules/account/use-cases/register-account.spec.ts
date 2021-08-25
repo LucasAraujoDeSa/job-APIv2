@@ -45,7 +45,7 @@ describe("==> signup", () => {
         ...params,
         email: "invalid_email",
       })
-    ).rejects.toEqual(new Error("invalid email format"));
+    ).rejects.toEqual(new Error("Invalid email format"));
   });
 
   it("should throw a error if email already in use", async () => {
@@ -59,7 +59,7 @@ describe("==> signup", () => {
       sut.add({
         ...params,
       })
-    ).rejects.toEqual(new Error("email already in use"));
+    ).rejects.toEqual(new Error("Email already in use"));
   });
 
   it("should return a hashedPassword if hashAdapter success", async () => {
