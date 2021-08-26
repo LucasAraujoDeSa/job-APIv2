@@ -1,7 +1,7 @@
 import { RegisterAccountContract } from "@/modules/account/domain/contracts/use-cases";
 import { AccountModel } from "@/modules/account/domain/models";
 import { EmailValidatorAdapter } from "@/shared/adapters";
-import { success } from "@/shared/application/helpers/http-helper";
+import { success, badRequest } from "@/shared/application/helpers";
 import { Controller, HttpResponse } from "@/shared/application/protocols";
 import { requiredFieldsValidation } from "@/shared/validations";
 
@@ -17,19 +17,15 @@ export class RegisterAccountController implements Controller {
     const requiredFields = requiredFieldsValidation(input);
 
     if (requiredFields.hasMissing) {
-      return {
-        status_code: 400,
-        body: `Required field ${requiredFields.missing_field} is missing`,
-      };
+      return badRequest(
+        `Required field ${requiredFields.missing_field} is missing`
+      );
     }
 
     const isValidEmail = await this._emailValidatorAdapter.isValid(input.email);
 
     if (!isValidEmail) {
-      return {
-        status_code: 400,
-        body: "Invalid email format",
-      };
+      return badRequest("Invalid email format");
     }
 
     const account = await this._registerAccount.add(input);
