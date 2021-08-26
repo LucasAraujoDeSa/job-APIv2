@@ -1,8 +1,4 @@
-import {
-  EmailValidatorAdapter,
-  HashAdapter,
-  SmtpAdapter,
-} from "@/shared/adapters";
+import { HashAdapter, SmtpAdapter } from "@/shared/adapters";
 import { RegisterAccountContract } from "../../contracts/use-cases/register-account-contract";
 import {
   CheckByEmailRepositoryContract,
@@ -11,7 +7,6 @@ import {
 
 export class RegisterAccount implements RegisterAccountContract {
   constructor(
-    private readonly _emailValidatorAdapter: EmailValidatorAdapter,
     private readonly _checkByEmailRepository: CheckByEmailRepositoryContract,
     private readonly _hashAdapter: HashAdapter,
     private readonly _addAccountRepository: AddAccountRepositoryContract,
@@ -21,14 +16,6 @@ export class RegisterAccount implements RegisterAccountContract {
   public async add(
     params: RegisterAccountContract.Params
   ): Promise<RegisterAccountContract.Result> {
-    const isValidEmail = await this._emailValidatorAdapter.isValid(
-      params.email
-    );
-
-    if (!isValidEmail) {
-      throw new Error("Invalid email format");
-    }
-
     const alreadyEmailInUse = await this._checkByEmailRepository.ifAlreadyInUse(
       params.email
     );
