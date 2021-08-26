@@ -3,6 +3,7 @@ import { AccountModel } from "@/modules/account/domain/models";
 import { EmailValidatorAdapter } from "@/shared/adapters";
 import { success } from "@/shared/application/helpers/http-helper";
 import { Controller, HttpResponse } from "@/shared/application/protocols";
+import { requiredFieldsValidation } from "@/shared/validations";
 
 export class RegisterAccountController implements Controller {
   constructor(
@@ -13,19 +14,13 @@ export class RegisterAccountController implements Controller {
   public async handle(
     input: RegisterAccountController.Input
   ): Promise<HttpResponse> {
-    const required_fields = Object.entries(input);
+    const requiredFields = requiredFieldsValidation(input);
 
-    for (const [key, value] of required_fields) {
-      if (
-        (key && typeof value === undefined) ||
-        typeof value === null ||
-        value === ""
-      ) {
-        return {
-          status_code: 400,
-          body: `Missing param ${key}`,
-        };
-      }
+    if (requiredFields.hasMissing) {
+      return {
+        status_code: 400,
+        body: `Required field ${requiredFields.missing_field} is missing`,
+      };
     }
 
     const isValidEmail = await this._emailValidatorAdapter.isValid(input.email);
