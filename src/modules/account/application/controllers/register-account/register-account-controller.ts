@@ -1,15 +1,8 @@
 import { RegisterAccountContract } from "@/modules/account/domain/contracts/use-cases";
 import { AccountModel } from "@/modules/account/domain/models";
 import { EmailValidatorAdapter } from "@/shared/adapters";
-
-interface HttpResponse {
-  status_code: number;
-  body?: any;
-}
-
-interface Controller<T = any> {
-  handle(request: T): Promise<HttpResponse>;
-}
+import { success } from "@/shared/application/helpers/http-helper";
+import { Controller, HttpResponse } from "@/shared/application/protocols";
 
 export class RegisterAccountController implements Controller {
   constructor(
@@ -46,10 +39,7 @@ export class RegisterAccountController implements Controller {
 
     const account = await this._registerAccount.add(input);
 
-    return {
-      status_code: 201,
-      body: account,
-    };
+    return success(account);
   }
 }
 
