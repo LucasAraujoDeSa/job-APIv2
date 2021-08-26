@@ -1,22 +1,16 @@
 import { RegisterAccount } from "@/modules/account/domain/use-cases/register-account/register-account";
-import {
-  EmailValidatorAdapterFake,
-  HashAdapterFake,
-  SmtpAdapterFake,
-} from "@/tests/shared/adapters";
+import { HashAdapterFake, SmtpAdapterFake } from "@/tests/shared/adapters";
 import { AccountMock } from "../mocks/account-mock";
 import { CheckByEmailRepositoryFake, AddAccountRepositoryFake } from "../fakes";
 
 const params = AccountMock();
 
 const makeSut = () => {
-  const emailValidatorAdapterFake = new EmailValidatorAdapterFake();
   const checkByEmailRepositoryFake = new CheckByEmailRepositoryFake();
   const hashAdapterFake = new HashAdapterFake();
   const addAccountRepositoryFake = new AddAccountRepositoryFake();
   const smtpAdapterFake = new SmtpAdapterFake();
   const sut = new RegisterAccount(
-    emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake,
     addAccountRepositoryFake,
@@ -24,7 +18,6 @@ const makeSut = () => {
   );
   return {
     sut,
-    emailValidatorAdapterFake,
     checkByEmailRepositoryFake,
     hashAdapterFake,
     addAccountRepositoryFake,
@@ -32,22 +25,7 @@ const makeSut = () => {
   };
 };
 
-describe("==> signup", () => {
-  it("should throw a error if email format is invalid", async () => {
-    const { sut, emailValidatorAdapterFake } = makeSut();
-
-    jest
-      .spyOn(emailValidatorAdapterFake, "isValid")
-      .mockImplementationOnce(() => new Promise((reject) => reject(false)));
-
-    expect(
-      sut.add({
-        ...params,
-        email: "invalid_email",
-      })
-    ).rejects.toEqual(new Error("Invalid email format"));
-  });
-
+describe("==> register account", () => {
   it("should throw a error if email already in use", async () => {
     const { sut, checkByEmailRepositoryFake } = makeSut();
 
