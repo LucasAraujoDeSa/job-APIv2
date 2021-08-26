@@ -1,3 +1,4 @@
+import { RegisterAccountContract } from "@/modules/account/domain/contracts/use-cases";
 import { AccountModel } from "@/modules/account/domain/models";
 import { EmailValidatorAdapter } from "@/shared/adapters";
 
@@ -11,11 +12,29 @@ interface Controller<T = any> {
 }
 
 export class RegisterAccountController implements Controller {
-  constructor(private readonly _emailValidatorAdapter: EmailValidatorAdapter) {}
+  constructor(
+    private readonly _emailValidatorAdapter: EmailValidatorAdapter,
+    private readonly _registerAccount: RegisterAccountContract
+  ) {}
 
   public async handle(
     input: RegisterAccountController.Input
   ): Promise<HttpResponse> {
+    const required_fields = Object.entries(input);
+
+    for (const [key, value] of required_fields) {
+      if (
+        (key && typeof value === undefined) ||
+        typeof value === null ||
+        value === ""
+      ) {
+        return {
+          status_code: 400,
+          body: `Missing param ${key}`,
+        };
+      }
+    }
+
     const isValidEmail = await this._emailValidatorAdapter.isValid(input.email);
 
     if (!isValidEmail) {
@@ -25,9 +44,11 @@ export class RegisterAccountController implements Controller {
       };
     }
 
+    const account = await this._registerAccount.add(input);
+
     return {
       status_code: 201,
-      body: "",
+      body: account,
     };
   }
 }
