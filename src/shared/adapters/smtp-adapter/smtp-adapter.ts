@@ -1,9 +1,9 @@
 export interface SmtpAdapter {
-  send(params: SmtpAdapter.Params): Promise<void>;
+  send(input: SmtpAdapter.Input): Promise<void>;
 }
 
 export namespace SmtpAdapter {
-  export type Params = {
+  export type Input = {
     id: string;
     email: string;
   };

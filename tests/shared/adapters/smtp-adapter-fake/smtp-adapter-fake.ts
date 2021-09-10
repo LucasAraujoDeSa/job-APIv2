@@ -1,9 +1,9 @@
 import { SmtpAdapter } from "@/shared/adapters";
 
 export class SmtpAdapterFake implements SmtpAdapter {
-  params: SmtpAdapter.Params;
+  input: SmtpAdapter.Input;
 
-  public async send(params: SmtpAdapter.Params): Promise<void> {
-    this.params = params;
+  public async send(input: SmtpAdapter.Input): Promise<void> {
+    this.input = input;
   }
 }
