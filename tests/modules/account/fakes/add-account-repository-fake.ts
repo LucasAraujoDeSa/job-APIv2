@@ -1,19 +1,19 @@
 import { AddAccountRepositoryContract } from "@/modules/account/domain/contracts/repositories";
 
 export class AddAccountRepositoryFake implements AddAccountRepositoryContract {
-  params: AddAccountRepositoryContract.Params;
+  input: AddAccountRepositoryContract.Input;
 
-  result: AddAccountRepositoryContract.Result;
+  output: AddAccountRepositoryContract.Output;
 
   public async add(
-    params: AddAccountRepositoryContract.Params
-  ): Promise<AddAccountRepositoryContract.Result> {
-    this.params = params;
-    this.result = {
+    input: AddAccountRepositoryContract.Input
+  ): Promise<AddAccountRepositoryContract.Output> {
+    this.input = input;
+    this.output = {
       id: "any_id",
-      ...params,
+      ...input,
     };
 
-    return this.result;
+    return this.output;
   }
 }

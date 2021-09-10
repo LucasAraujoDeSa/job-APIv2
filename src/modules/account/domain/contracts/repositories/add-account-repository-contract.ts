@@ -2,11 +2,11 @@ import { AccountModel } from "../../models";
 
 export interface AddAccountRepositoryContract {
   add(
-    params: AddAccountRepositoryContract.Params
-  ): Promise<AddAccountRepositoryContract.Result>;
+    input: AddAccountRepositoryContract.Input
+  ): Promise<AddAccountRepositoryContract.Output>;
 }
 
 export namespace AddAccountRepositoryContract {
-  export type Params = Omit<AccountModel, "id">;
-  export type Result = AccountModel;
+  export type Input = Omit<AccountModel, "id">;
+  export type Output = AccountModel;
 }

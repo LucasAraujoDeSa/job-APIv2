@@ -14,20 +14,20 @@ export class RegisterAccount implements RegisterAccountContract {
   ) {}
 
   public async add(
-    params: RegisterAccountContract.Params
-  ): Promise<RegisterAccountContract.Result> {
+    input: RegisterAccountContract.Input
+  ): Promise<RegisterAccountContract.Output> {
     const alreadyEmailInUse = await this._checkByEmailRepository.ifAlreadyInUse(
-      params.email
+      input.email
     );
 
     if (alreadyEmailInUse) {
       throw new Error("Email already in use");
     }
 
-    const hashedPassword = await this._hashAdapter.hash(params.password);
+    const hashedPassword = await this._hashAdapter.hash(input.password);
 
     const newAccount = await this._addAccountRepository.add({
-      ...params,
+      ...input,
       password: hashedPassword,
     });
 

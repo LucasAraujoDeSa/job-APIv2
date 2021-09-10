@@ -3,7 +3,7 @@ import { HashAdapterFake, SmtpAdapterFake } from "@/tests/shared/adapters";
 import { AccountMock } from "../mocks/account-mock";
 import { CheckByEmailRepositoryFake, AddAccountRepositoryFake } from "../fakes";
 
-const params = AccountMock();
+const input = AccountMock();
 
 const makeSut = () => {
   const checkByEmailRepositoryFake = new CheckByEmailRepositoryFake();
@@ -35,7 +35,7 @@ describe("==> register account", () => {
 
     expect(
       sut.add({
-        ...params,
+        ...input,
       })
     ).rejects.toEqual(new Error("Email already in use"));
   });
@@ -44,7 +44,7 @@ describe("==> register account", () => {
     const { sut, hashAdapterFake } = makeSut();
 
     const user = await sut.add({
-      ...params,
+      ...input,
     });
 
     expect(user.password).toEqual(hashAdapterFake.hashedplaintext);
@@ -53,9 +53,9 @@ describe("==> register account", () => {
   it("should call smtpAdapter", async () => {
     const { sut, smtpAdapterFake } = makeSut();
 
-    const user = await sut.add(params);
+    const user = await sut.add(input);
 
-    expect(smtpAdapterFake.params).toEqual({
+    expect(smtpAdapterFake.input).toEqual({
       id: user.id,
       email: user.email,
     });
@@ -64,8 +64,8 @@ describe("==> register account", () => {
   it("should return a newAccount if success", async () => {
     const { sut, addAccountRepositoryFake } = makeSut();
 
-    const user = await sut.add(params);
+    const user = await sut.add(input);
 
-    expect(user).toEqual(addAccountRepositoryFake.result);
+    expect(user).toEqual(addAccountRepositoryFake.output);
   });
 });
