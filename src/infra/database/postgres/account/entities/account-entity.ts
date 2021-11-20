@@ -31,10 +31,10 @@ export class PostgresAccoutnEntity implements AccountModel {
   @Column()
   password: string;
 
-  @Column({ type: "enum", enum: ROLES })
+  @Column({ type: "enum", enum: ROLES, default: ROLES.user })
   role: string;
 
-  @Column({ type: "enum", enum: STATUS })
+  @Column({ type: "enum", enum: STATUS, default: STATUS.inactive })
   status: string;
 
   @CreateDateColumn()
