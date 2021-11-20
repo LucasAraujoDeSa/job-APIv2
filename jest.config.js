@@ -3,6 +3,7 @@ module.exports = {
     "<rootDir>/src/**/*.ts",
     "!<rootDir>/src/main/**",
     "!<rootDir>/src/**/index.ts",
+    "!<rootDir>/src/**/migrations/*.ts"
   ],
   coverageDirectory: "coverage",
   coverageProvider: "babel",
@@ -10,7 +11,7 @@ module.exports = {
     "@/tests/(.+)": "<rootDir>/tests/$1",
     "@/(.+)": "<rootDir>/src/$1",
   },
-  testMatch: ["**/*.spec.ts"],
+  testMatch: ["**/*.spec.ts", "**/*.test.ts"],
   roots: ["<rootDir>/src", "<rootDir>/tests"],
   transform: {
     "\\.ts$": "ts-jest",
