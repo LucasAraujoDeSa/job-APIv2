@@ -12,6 +12,8 @@
     "test:watch": "yarn test --watch",
     "test:staged": "yarn test --findRelatedTests",
     "test:coverage": "yarn test --coverage",
+    "test:unit": "yarn test --watch -c jest-unit-config.js",
+    "test:integration": "yarn test -c jest-integration-config.js",
     "typeorm": "tsnd ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
