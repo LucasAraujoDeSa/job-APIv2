@@ -9,13 +9,13 @@ export const connection = {
     await getConnection().close();
   },
 
+  async run_migrations() {
+    const connection = getConnection();
+    await connection.runMigrations();
+  },
+
   async clear() {
     const connection = getConnection();
-    const entities = connection.entityMetadatas;
-
-    entities.forEach(async (entity) => {
-      const repository = connection.getRepository(entity.name);
-      await repository.clear();
-    });
+    await connection.dropDatabase();
   },
 };
