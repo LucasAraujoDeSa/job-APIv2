@@ -16,6 +16,7 @@
     "typeorm": "tsnd ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "git-commit-msg-linter": "^3.2.6",
     "pg": "^8.7.1",
     "typeorm": "^0.2.41"

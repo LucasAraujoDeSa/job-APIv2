@@ -37,7 +37,7 @@ describe("==> check_by_email_repository", () => {
 
     const verify = await sut.ifAlreadyInUse("jhon_doe@email.com");
 
-    expect(verify).toBe(false);
+    expect(verify).toBe(true);
   });
 
   it("should return a true if email is already in use", async () => {

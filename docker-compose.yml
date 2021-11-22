@@ -5,6 +5,9 @@ services:
     container_name: postgres
     environment:
       - POSTGRES_PASSWORD=c137
+      - POSTGRES_DATABASE=job-api
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_HOST=db
     ports:
       - "5432:5432"
     volumes:
