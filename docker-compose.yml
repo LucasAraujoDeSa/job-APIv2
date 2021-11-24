@@ -4,7 +4,10 @@ services:
     image: postgres
     container_name: postgres
     environment:
-      - POSTGRES_PASSWORD=c137
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_DATABASE=${DATABASE_DATABASE}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABSE_PORT=${DATABSE_PORT}
     ports:
       - "5432:5432"
     volumes:
