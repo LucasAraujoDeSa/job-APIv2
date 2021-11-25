@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    environment:
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_DATABASE=${DATABASE_DATABASE}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABSE_PORT=${DATABSE_PORT}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.docker:/var/lib/postgresql/data
