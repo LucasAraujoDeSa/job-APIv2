@@ -1,0 +1,11 @@
+FROM node:17.1.0
+
+WORKDIR /app
+
+COPY package.json ./
+
+RUN yarn
+
+COPY . .
+
+EXPOSE 3333
