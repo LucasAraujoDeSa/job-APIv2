@@ -1,4 +1,5 @@
 import { HashAdapter, SmtpAdapter } from "@/shared/adapters";
+import { ExceptionHandler } from "@/shared/application/errors/exception-handle";
 import { RegisterAccountContract } from "../../contracts/use-cases/register-account-contract";
 import {
   CheckByEmailRepositoryContract,
@@ -21,7 +22,7 @@ export class RegisterAccount implements RegisterAccountContract {
     );
 
     if (alreadyEmailInUse) {
-      throw new Error("Email already in use");
+      throw new ExceptionHandler("Email already in use", 400);
     }
 
     const hashedPassword = await this._hashAdapter.hash(input.password);
