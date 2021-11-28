@@ -1,5 +1,6 @@
 import { RegisterAccount } from "@/modules/account/domain/use-cases/register-account/register-account";
 import { HashAdapterFake, SmtpAdapterFake } from "@/tests/shared/adapters";
+import { ExceptionHandler } from "@/shared/application/errors/exception-handle";
 import { AccountMock } from "../mocks/account-mock";
 import { CheckByEmailRepositoryFake, AddAccountRepositoryFake } from "../fakes";
 
@@ -37,7 +38,7 @@ describe("==> register account", () => {
       sut.add({
         ...input,
       })
-    ).rejects.toEqual(new Error("Email already in use"));
+    ).rejects.toEqual(new ExceptionHandler("Email already in use", 400));
   });
 
   it("should return a hashedPassword if hashAdapter success", async () => {
