@@ -5,3 +5,4 @@ temp
 uploads
 .docker
 .env
+yarn-error.log
