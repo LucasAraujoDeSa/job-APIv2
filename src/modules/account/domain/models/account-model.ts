@@ -3,6 +3,6 @@ export interface AccountModel {
   name: string;
   email: string;
   password: string;
-  status: string;
-  role: string;
+  status: string | undefined;
+  role: string | undefined;
 }
