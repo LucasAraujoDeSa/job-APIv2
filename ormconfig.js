@@ -1,9 +1,8 @@
 require("dotenv/config")
-
 const devDatabase = {
     type:"postgres",
-    host: process.env.NODE_ENV === "dev" ? "localhost" :process.env.DATABASE_HOST,
-    port: process.env.DATABSE_PORT,
+    host: process.env.NODE_ENV === "dev" ? "localhost" : process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_DATABASE,
@@ -20,7 +19,7 @@ const testDatabase = {
     port: process.env.DATABSE_PORT,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DATABASE,
+    database: "job-api-test",
     entities:["./src/infra/database/postgres/**/entities/*.ts"],
     migrations:["./src/infra/database/postgres/migrations/*.ts"],
     cli: {

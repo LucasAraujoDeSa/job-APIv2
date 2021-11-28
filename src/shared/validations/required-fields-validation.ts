@@ -8,11 +8,7 @@ export const requiredFieldsValidation = (input: any): MissingFields => {
   const hasMissing = false;
 
   for (const [key, value] of required_fields) {
-    if (
-      (key && typeof value === undefined) ||
-      typeof value === null ||
-      value === ""
-    ) {
+    if (value === undefined || value === null || value === "") {
       return {
         hasMissing: true,
         missing_field: key,
