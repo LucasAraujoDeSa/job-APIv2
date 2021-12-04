@@ -1,4 +1,3 @@
-import { AccountModel } from "@/modules/account/domain/models";
 import {
   PrimaryGeneratedColumn,
   Entity,
@@ -6,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { AccountModel } from "@/modules/account/domain/models";
 
 enum ROLES {
   user = "USER",

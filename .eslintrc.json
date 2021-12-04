@@ -38,6 +38,7 @@
         "argsIgnorePattern": "_"
       }
     ],
+    "no-promise-executor-return":"off",
     "import/extensions": [
       "error",
       "ignorePackages",

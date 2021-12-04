@@ -1,5 +1,5 @@
-import { HashAdapter } from "@/shared/adapters";
 import { hash, compare } from "bcrypt";
+import { HashAdapter } from "@/shared/adapters";
 
 export class BcryptAdapter implements HashAdapter {
   public async hash(plaintext: string): Promise<string> {
