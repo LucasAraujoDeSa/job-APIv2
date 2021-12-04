@@ -4,19 +4,19 @@ services:
     image: postgres
     container_name: postgres
     environment:
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_DATABASE=${DATABASE_DATABASE}
-      - POSTGRES_USERNAME=${DATABASE_USERNAME}
-      - POSTGRES_PORT=${DATABASE_PORT}
-      - POSTGRES_HOST=${DATABASE_HOST}
+      - POSTGRES_PASSWORD=c137
+      - POSTGRES_DATABASEjob_api
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
     ports:
       - "5432:5432"
     volumes:
-      - ./.docker:/var/lib/postgresql/data
+      - ./docker:/var/lib/postgresql/data
     networks:
       - api
   job-api:
-    image: job-api:dev
+    image: job-backend:developer
     container_name: job-api-dev
     restart: always
     command: yarn dev
@@ -26,7 +26,7 @@ services:
     environment:
       - NODE_ENV=docker-dev
     volumes:
-      - "./:/app"
+      - ".:/app"
     depends_on:
       - db
     networks:
