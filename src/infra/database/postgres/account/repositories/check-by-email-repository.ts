@@ -1,5 +1,5 @@
-import { CheckByEmailRepositoryContract } from "@/modules/account/domain/contracts/repositories";
 import { Repository, getRepository } from "typeorm";
+import { CheckByEmailRepositoryContract } from "@/modules/account/domain/contracts/repositories";
 import { PostgresAccoutnEntity } from "../entities/account-entity";
 
 export class PostgresCheckByEmailRepository

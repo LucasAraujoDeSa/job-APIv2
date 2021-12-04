@@ -1,5 +1,5 @@
-import { SmtpAdapter } from "@/shared/adapters";
 import { createTransport } from "nodemailer";
+import { SmtpAdapter } from "@/shared/adapters";
 
 export class NodemailerAdapter implements SmtpAdapter {
   private client = createTransport({
