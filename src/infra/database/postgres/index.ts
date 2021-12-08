@@ -9,13 +9,19 @@ export const connection = {
     await getConnection().close();
   },
 
-  async run_migrations() {
+  async create_database(database: string) {
     const connection = getConnection();
-    await connection.runMigrations();
+    connection.query(`CREATE DATABASE ${database};`);
   },
 
   async clear() {
     const connection = getConnection();
-    await connection.dropDatabase();
+    const entities = connection.entityMetadatas;
+
+    const entityDeletionPromises = entities.map((entity) => async () => {
+      const repository = connection.getRepository(entity.name);
+      await repository.query(`DELETE FROM ${entity.tableName}`);
+    });
+    await Promise.all(entityDeletionPromises);
   },
 };
