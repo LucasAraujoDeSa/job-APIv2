@@ -7,4 +7,5 @@ export const AccountMock = (): Omit<AccountModel, "id"> => ({
   password: faker.internet.password(),
   status: "active",
   role: "user",
+  access_token: "1234abc",
 });

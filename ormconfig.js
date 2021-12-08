@@ -19,7 +19,10 @@ const testDatabase = {
     port: process.env.DATABSE_PORT,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    database: "job-api-test",
+    dropSchema: true,
+    synchroize: true,
+    migrationsRun: true,
+    database: "job_api_test",
     entities:["./src/infra/database/postgres/**/entities/*.ts"],
     migrations:["./src/infra/database/postgres/migrations/*.ts"],
     cli: {

@@ -19,16 +19,13 @@ const makeSut = () => {
 describe("==> check_by_email_repository", () => {
   beforeAll(async () => {
     await connection.create();
-    await connection.run_migrations();
   });
 
-  afterEach(async () => {
+  beforeEach(async () => {
     await connection.clear();
-    await connection.run_migrations();
   });
 
   afterAll(async () => {
-    await connection.clear();
     await connection.close();
   });
 

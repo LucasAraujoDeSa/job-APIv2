@@ -27,7 +27,7 @@ const makeSut = () => {
 };
 
 describe("==> register account", () => {
-  it("should throw a error if email already in use", async () => {
+  it("should throw a error if email already in use", () => {
     const { sut, checkByEmailRepositoryFake } = makeSut();
 
     jest
