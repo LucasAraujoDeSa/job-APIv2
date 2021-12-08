@@ -37,6 +37,9 @@ export class PostgresAccoutnEntity implements AccountModel {
   @Column({ type: "enum", enum: STATUS, default: STATUS.inactive })
   status: string;
 
+  @Column()
+  access_token: string;
+
   @CreateDateColumn()
   created_at: Date;
 

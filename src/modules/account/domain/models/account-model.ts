@@ -5,4 +5,5 @@ export interface AccountModel {
   password: string;
   status: string | undefined;
   role: string | undefined;
+  access_token: string | undefined;
 }
