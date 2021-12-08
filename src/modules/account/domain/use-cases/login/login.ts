@@ -32,7 +32,7 @@ export class Login implements LoginContract {
       throw new ExceptionHandler("email or password incorrect", 400);
     }
 
-    const token = await this._encrypterAdapter.sign(account.id);
+    const token = this._encrypterAdapter.sign(account.id);
 
     const authenticated_account = await this._updateAcessToken.update(
       account.id,

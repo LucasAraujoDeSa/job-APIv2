@@ -1,4 +1,4 @@
 export interface EncrypterAdapter {
-  sign(id: string): Promise<string>;
-  verify(token: string): Promise<string>;
+  sign(id: string): string;
+  verify(token: string): string | undefined;
 }
