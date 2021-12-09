@@ -1,17 +1,17 @@
 import { LoginContract } from "../../contracts/use-cases";
 import {
-  GetAccountByEmailContract,
-  UpdateAcessTokenContract,
+  GetAccountByEmailRepositoryContract,
+  UpdateAcessTokenRepositoryContract,
 } from "../../contracts/repositories";
 import { ExceptionHandler } from "@/shared/application/errors/exception-handle";
 import { HashAdapter, EncrypterAdapter } from "@/shared/adapters";
 
 export class Login implements LoginContract {
   constructor(
-    private readonly _getAccountByEmail: GetAccountByEmailContract,
+    private readonly _getAccountByEmail: GetAccountByEmailRepositoryContract,
     private readonly _hashAdapter: HashAdapter,
     private readonly _encrypterAdapter: EncrypterAdapter,
-    private readonly _updateAcessToken: UpdateAcessTokenContract
+    private readonly _updateAcessToken: UpdateAcessTokenRepositoryContract
   ) {}
 
   public async login(
