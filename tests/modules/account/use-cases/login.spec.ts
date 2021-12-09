@@ -1,37 +1,40 @@
 import { Login } from "@/modules/account/domain/use-cases/login";
 import { HashAdapterFake, EncrypterAdapterFake } from "@/tests/shared/adapters";
 import { LoginMock } from "../mocks";
-import { GetAccountByEmailFake, UpdateAcessTokenFake } from "../fakes";
+import {
+  GetAccountByEmailRepositoryFake,
+  UpdateAcessTokenRepositoryFake,
+} from "../fakes";
 import { ExceptionHandler } from "@/shared/application/errors/exception-handle";
 
 const input = LoginMock();
 
 const makeSut = () => {
-  const getAccountByEmailFake = new GetAccountByEmailFake();
+  const getAccountByEmailRepositoryFake = new GetAccountByEmailRepositoryFake();
   const hashAdapterFake = new HashAdapterFake();
   const encrypterAdapterFake = new EncrypterAdapterFake();
-  const updateAcessTokenFake = new UpdateAcessTokenFake();
+  const updateAcessTokenRepositoryFake = new UpdateAcessTokenRepositoryFake();
   const sut = new Login(
-    getAccountByEmailFake,
+    getAccountByEmailRepositoryFake,
     hashAdapterFake,
     encrypterAdapterFake,
-    updateAcessTokenFake
+    updateAcessTokenRepositoryFake
   );
   return {
     sut,
-    getAccountByEmailFake,
+    getAccountByEmailRepositoryFake,
     hashAdapterFake,
     encrypterAdapterFake,
-    updateAcessTokenFake,
+    updateAcessTokenRepositoryFake,
   };
 };
 
 describe("==> login", () => {
   it("should thow a error if account not exist", () => {
-    const { getAccountByEmailFake, sut } = makeSut();
+    const { getAccountByEmailRepositoryFake, sut } = makeSut();
 
     jest
-      .spyOn(getAccountByEmailFake, "get_account")
+      .spyOn(getAccountByEmailRepositoryFake, "get_account")
       .mockImplementationOnce(() => new Promise((reject) => reject(undefined)));
 
     expect(sut.login(input)).rejects.toEqual(
@@ -61,9 +64,9 @@ describe("==> login", () => {
   });
 
   it("should call update access token", async () => {
-    const { updateAcessTokenFake, sut } = makeSut();
+    const { updateAcessTokenRepositoryFake, sut } = makeSut();
 
-    const updateTokenSpy = jest.spyOn(updateAcessTokenFake, "update");
+    const updateTokenSpy = jest.spyOn(updateAcessTokenRepositoryFake, "update");
     await sut.login(input);
 
     expect(updateTokenSpy).toHaveBeenCalled();
