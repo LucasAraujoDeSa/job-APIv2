@@ -13,6 +13,7 @@
     "test:coverage": "yarn test --coverage",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
     "test:integration": "NODE_ENV=test yarn test -c jest-integration-config.js",
+    "test:staged": "yarn test -c jest-unit-config.js",
     "typeorm": "tsnd ./node_modules/typeorm/cli.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/main/server.ts",
     "install-upgrade-lib": "sudo npm -i -g npm-check-updates",

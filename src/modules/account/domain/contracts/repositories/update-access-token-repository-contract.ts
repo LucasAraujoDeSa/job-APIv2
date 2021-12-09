@@ -1,5 +1,5 @@
 import { AccountModel } from "../../models";
 
-export interface UpdateAcessTokenContract {
+export interface UpdateAcessTokenRepositoryContract {
   update(id: string, token: string): Promise<AccountModel>;
 }
