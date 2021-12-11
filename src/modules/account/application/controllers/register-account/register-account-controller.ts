@@ -22,9 +22,9 @@ export class RegisterAccountController implements Controller {
         return badRequest("Invalid email format");
       }
 
-      const account = await this._registerAccount.add(input);
+      const { id, name, email } = await this._registerAccount.add(input);
 
-      return success(account);
+      return success({ id, name, email });
     } catch (error) {
       return handleError(error as Err);
     }

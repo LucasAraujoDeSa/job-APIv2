@@ -7,9 +7,9 @@ export class LoginController implements Controller {
 
   public async handle(input: LoginController.Input): Promise<HttpResponse> {
     try {
-      const account = await this._login.login(input);
+      const { id, name } = await this._login.login(input);
 
-      return ok(account);
+      return ok({ id, name });
     } catch (error) {
       return handleError(error as Err);
     }
