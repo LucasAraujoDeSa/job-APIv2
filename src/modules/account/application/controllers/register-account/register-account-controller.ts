@@ -3,7 +3,6 @@ import { AccountModel } from "@/modules/account/domain/models";
 import { EmailValidatorAdapter } from "@/shared/adapters";
 import { success, badRequest, handleError } from "@/shared/application/helpers";
 import { Controller, Err, HttpResponse } from "@/shared/application/protocols";
-import { requiredFieldsValidation } from "@/shared/validations";
 
 export class RegisterAccountController implements Controller {
   constructor(
@@ -15,14 +14,6 @@ export class RegisterAccountController implements Controller {
     input: RegisterAccountController.Input
   ): Promise<HttpResponse> {
     try {
-      const requiredFields = requiredFieldsValidation(input);
-
-      if (requiredFields.hasMissing) {
-        return badRequest(
-          `Required field ${requiredFields.missing_field} is missing`
-        );
-      }
-
       const isValidEmail = await this._emailValidatorAdapter.isValid(
         input.email
       );
@@ -31,9 +22,9 @@ export class RegisterAccountController implements Controller {
         return badRequest("Invalid email format");
       }
 
-      const account = await this._registerAccount.add(input);
+      const { id, name, email } = await this._registerAccount.add(input);
 
-      return success(account);
+      return success({ id, name, email });
     } catch (error) {
       return handleError(error as Err);
     }

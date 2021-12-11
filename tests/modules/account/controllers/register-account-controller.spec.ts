@@ -45,17 +45,6 @@ describe("==> register account controller", () => {
     expect(httpResponse.body).toEqual("Invalid email format");
   });
 
-  it("should 400 if fields is missing", async () => {
-    const { sut } = makeSut();
-
-    const httpResponse = await sut.handle({
-      ...params,
-      email: "",
-    });
-
-    expect(httpResponse.status_code).toEqual(400);
-  });
-
   it("should 201 on success", async () => {
     const { sut } = makeSut();
 
