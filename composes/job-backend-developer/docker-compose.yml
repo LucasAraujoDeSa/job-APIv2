@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./docker:/var/lib/postgresql/data
+      - /app/docker:/var/lib/postgresql/data
     networks:
       - api
   job-api:
@@ -24,9 +24,7 @@ services:
     ports: 
       - 3333:3333
     environment:
-      - NODE_ENV=docker-dev
-    volumes:
-      - ".:/app"
+      - NODE_ENV=docker-developer
     depends_on:
       - db
     networks:
