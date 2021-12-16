@@ -14,6 +14,7 @@ export class EncrypterAdapterFake implements EncrypterAdapter {
 
   public verify(token: string): VerifyToken {
     this.token = token;
+    this.sub = "id";
     return this.sub;
   }
 }
