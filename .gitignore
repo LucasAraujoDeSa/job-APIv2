@@ -3,6 +3,6 @@ coverage
 dist
 temp
 uploads
-.docker
+docker
 .env
 yarn-error.log
